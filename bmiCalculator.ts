@@ -1,4 +1,6 @@
-type bmiLimits = 18.4 | 25 | 30;
+const bmiUnder = 18.4;
+const bmiNormal = 18.5;
+const bmiOver = 25;
 type Result = string;
 
 interface bmiValues {
@@ -20,21 +22,25 @@ const parseArguments = (args: Array<string>): bmiValues => {
   }
 };
 
-// const calculateBmi = () => {
+const calculateBmi = (weight: number, height: number): Result => {
+  const bmi: number = weight / Math.pow(height / 100, 2);
 
-// };
+  if (bmi <= bmiUnder) {
+    return 'underweight (unhealthy weight)';
+  } else if (bmi === bmiNormal || bmi < bmiOver) {
+    return 'Normal (healthy weight)';
+  } else if (bmi === bmiOver || bmi > bmiOver) {
+    return 'overweight (unhealthy weight)';
+  }
+};
 
-// try {
-//   const { value1, value2 } = parseArguments(process.argv);
-//   calculateBmi(
-//     value1,
-//     value2,
-//     `Multiplied ${value1} and ${value2}, the result is:`
-//   );
-// } catch (error: unknown) {
-//   let errorMessage = 'Something bad happened.';
-//   if (error instanceof Error) {
-//     errorMessage += ' Error: ' + error.message;
-//   }
-//   console.log(errorMessage);
-// }
+try {
+  const { value1, value2 } = parseArguments(process.argv);
+  console.log(calculateBmi(value1, value2));
+} catch (error: unknown) {
+  let errorMessage = 'Something bad happened.';
+  if (error instanceof Error) {
+    errorMessage += ' Error: ' + error.message;
+  }
+  console.log(errorMessage);
+}
