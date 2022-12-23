@@ -1,7 +1,7 @@
 const bmiUnder = 18.4;
 const bmiNormal = 18.5;
 const bmiOver = 25;
-type Result = string;
+type Resultat = string;
 
 interface bmiValues {
   value1: number;
@@ -22,7 +22,7 @@ const parseArguments = (args: Array<string>): bmiValues => {
   }
 };
 
-const calculateBmi = (weight: number, height: number): Result => {
+const calculateBmi = (weight: number, height: number): Resultat => {
   const bmi: number = weight / Math.pow(height / 100, 2);
 
   if (bmi <= bmiUnder) {
