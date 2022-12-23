@@ -76,5 +76,5 @@ try {
   console.log(errorMessage);
 }
 
-//dont forget to avoid zsh no matches, you to enter in the console the parameters like this: npm run exos '[1,2]' 3
+//dont forget to avoid zsh no matches, you to enter in the console the parameters like this: npm run exos '[1,2,4,7,2,5]' 3
 //So the array argument needs quotes
