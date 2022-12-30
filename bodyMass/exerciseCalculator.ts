@@ -1,8 +1,3 @@
-interface Params {
-  value1: number[];
-  value2: number;
-}
-
 interface Result {
   periodLength: number;
   trainingDays: number;
@@ -13,27 +8,25 @@ interface Result {
   average: number;
 }
 
-const parseArgs = (args: Array<string>): Params => {
-  if (args.length < 4) throw new Error('Not enough arguments');
-  if (args.length > 4) throw new Error('Too many arguments');
-
-  const exercices: number[] = args[2]
-    .slice(1, -1)
-    .split(',')
-    .map((e) => parseFloat(e));
-  const target: number = parseFloat(args[3]);
-
-  if (!exercices.some(isNaN) && !isNaN(target)) {
-    return {
-      value1: exercices,
-      value2: target
-    };
-  } else {
-    throw new Error('Provided values were not corrects!');
+const parseArgs = (args: Array<string>): Array<number> => {
+  if (args.length < 4)
+    throw new Error('Please provide both a target and some amount of days');
+  if (isNaN(Number(args[2]))) {
+    throw new Error(
+      'Target must be a number. Use the format: npm run calculateExercises <target> <day 1> <day 2> ... <day n>.'
+    );
   }
+
+  const userData = args.filter((_arg, i) => i > 1);
+  return userData.map((arg) => {
+    if (isNaN(Number(arg))) {
+      throw new Error('Exercise amount must be a number');
+    }
+    return Number(arg);
+  });
 };
 
-const calculateExercises = (exercices: number[], target: number): Result => {
+const calculateExercises = (exercices: Array<number>): Result => {
   const periodLength: number = exercices.length;
   const trainingDays: number = exercices.filter(
     (exerciseHour) => exerciseHour > 0
@@ -44,6 +37,7 @@ const calculateExercises = (exercices: number[], target: number): Result => {
 
   let rating: number;
   let ratingDescription: string;
+  const target = exercices[0];
   if (average < target) {
     rating = 1;
     ratingDescription = `Too bad you didn't reach your exercise goals this week, try again next week`;
@@ -65,16 +59,18 @@ const calculateExercises = (exercices: number[], target: number): Result => {
   };
 };
 
-try {
-  const { value1, value2 } = parseArgs(process.argv);
-  console.log(calculateExercises(value1, value2));
-} catch (error: unknown) {
-  let errorMessage = 'Something bad happened.';
-  if (error instanceof Error) {
-    errorMessage += ' Error: ' + error.message;
+function exosResultat() {
+  try {
+    const data = parseArgs(process.argv);
+    console.log(data);
+    console.log(calculateExercises(data));
+  } catch (error: unknown) {
+    let errorMessage = 'Something bad happened.';
+    if (error instanceof Error) {
+      errorMessage += ' Error: ' + error.message;
+    }
+    console.log(errorMessage);
   }
-  console.log(errorMessage);
 }
 
-//dont forget to avoid zsh no matches, you to enter in the console the parameters like this: npm run exos '[1,2,4,7,2,5]' 3
-//So the array argument needs quotes
+exosResultat();
