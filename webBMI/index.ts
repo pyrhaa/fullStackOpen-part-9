@@ -20,10 +20,12 @@ app.get('/bmi', (_req, res) => {
         })
         .end();
     }
-    const bmi = calculateBmi(Number(height), Number(weight));
-    // console.log('bmi: ', bmi);
 
-    return null;
+    const bmi = calculateBmi(Number(height), Number(weight));
+
+    console.log('bmi: ', bmi);
+
+    return res.send('hello');
   } catch (error) {
     return res.status(404).send(error);
   }
