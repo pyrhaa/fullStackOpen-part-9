@@ -47,3 +47,5 @@ function bmiResultat() {
 }
 
 bmiResultat();
+
+export { calculateBmi };
