@@ -1,5 +1,6 @@
 import express from 'express';
 import { calculateBmi } from '../bodyMass/bmiCalculator';
+import { calculateExercises } from '../bodyMass/exerciseCalculator';
 const app = express();
 
 app.get('/hello', (_req, res) => {

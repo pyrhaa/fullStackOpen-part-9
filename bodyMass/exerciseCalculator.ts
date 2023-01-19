@@ -8,23 +8,23 @@ interface Result {
   average: number;
 }
 
-const parseArgs = (args: Array<string>): Array<number> => {
-  if (args.length < 4)
-    throw new Error('Please provide both a target and some amount of days');
-  if (isNaN(Number(args[2]))) {
-    throw new Error(
-      'Target must be a number. Use the format: npm run calculateExercises <target> <day 1> <day 2> ... <day n>.'
-    );
-  }
+// const parseArgs = (args: Array<string>): Array<number> => {
+//   if (args.length < 4)
+//     throw new Error('Please provide both a target and some amount of days');
+//   if (isNaN(Number(args[2]))) {
+//     throw new Error(
+//       'Target must be a number. Use the format: npm run calculateExercises <target> <day 1> <day 2> ... <day n>.'
+//     );
+//   }
 
-  const userData = args.filter((_arg, i) => i > 1);
-  return userData.map((arg) => {
-    if (isNaN(Number(arg))) {
-      throw new Error('Exercise amount must be a number');
-    }
-    return Number(arg);
-  });
-};
+//   const userData = args.filter((_arg, i) => i > 1);
+//   return userData.map((arg) => {
+//     if (isNaN(Number(arg))) {
+//       throw new Error('Exercise amount must be a number');
+//     }
+//     return Number(arg);
+//   });
+// };
 
 const calculateExercises = (exercices: Array<number>): Result => {
   const periodLength: number = exercices.length;
@@ -59,18 +59,20 @@ const calculateExercises = (exercices: Array<number>): Result => {
   };
 };
 
-function exosResultat() {
-  try {
-    const data = parseArgs(process.argv);
-    console.log(data);
-    console.log(calculateExercises(data));
-  } catch (error: unknown) {
-    let errorMessage = 'Something bad happened.';
-    if (error instanceof Error) {
-      errorMessage += ' Error: ' + error.message;
-    }
-    console.log(errorMessage);
-  }
-}
+// function exosResultat() {
+//   try {
+//     const data = parseArgs(process.argv);
+//     console.log(data);
+//     console.log(calculateExercises(data));
+//   } catch (error: unknown) {
+//     let errorMessage = 'Something bad happened.';
+//     if (error instanceof Error) {
+//       errorMessage += ' Error: ' + error.message;
+//     }
+//     console.log(errorMessage);
+//   }
+// }
 
-exosResultat();
+// exosResultat();
+
+export { calculateExercises };
