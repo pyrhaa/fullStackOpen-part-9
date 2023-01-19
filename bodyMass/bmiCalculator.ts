@@ -20,16 +20,22 @@ type Resultat = string;
 // };
 
 const calculateBmi = (height: number, weight: number): Resultat => {
-  const bmiNormal = 18.5;
-  const bmiOver = 25;
-  const bmi: number = weight / Math.pow(height / 100, 2);
+  try {
+    const bmiNormal = 18.5;
+    const bmiOver = 25;
+    const bmi: number = weight / Math.pow(height / 100, 2);
 
-  if (bmi < bmiNormal) {
-    return 'underweight (unhealthy weight)';
-  } else if (bmi === bmiNormal || bmi < bmiOver) {
-    return 'Normal (healthy weight)';
-  } else if (bmi === bmiOver || bmi > bmiOver) {
-    return 'overweight (unhealthy weight)';
+    if (bmi < bmiNormal) {
+      return 'underweight (unhealthy weight)';
+    } else if (bmi === bmiNormal || bmi < bmiOver) {
+      return 'Normal (healthy weight)';
+    } else if (bmi === bmiOver || bmi > bmiOver) {
+      return 'overweight (unhealthy weight)';
+    }
+    return 'Invalid Args';
+  } catch (error) {
+    console.log('ErrorMessage: ', error);
+    return 'Error in the func bmiCalculator';
   }
 };
 

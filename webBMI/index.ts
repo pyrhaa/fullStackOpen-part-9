@@ -23,10 +23,10 @@ app.get('/bmi', (_req, res) => {
 
     const bmi = calculateBmi(Number(height), Number(weight));
 
-    console.log('bmi: ', bmi);
-
-    return res.send('hello');
+    return res.json({ weight, height, bmi });
   } catch (error) {
+    console.log(error);
+
     return res.status(404).send(error);
   }
 });
