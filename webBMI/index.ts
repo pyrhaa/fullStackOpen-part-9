@@ -32,6 +32,25 @@ app.get('/bmi', (_req, res) => {
   }
 });
 
+app.post('/exercices', (_req, res) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { daily_exercises, target } = _req.body;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+  const validParameter1: boolean = daily_exercises.every((el) => {
+    return typeof el === 'number';
+  });
+  const validParameter2 = !isNaN(Number(target));
+
+  if (!daily_exercises || !target) {
+    return res.status(400).send({ error: 'parameters missing' });
+  }
+  if (!validParameter1 || !validParameter2) {
+    return res.status(400).send({ error: 'malformatted parameters' });
+  }
+
+  return null;
+});
+
 const PORT = 3003;
 
 app.listen(PORT, () => {
