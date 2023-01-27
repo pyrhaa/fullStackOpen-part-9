@@ -1,7 +1,8 @@
 import express from 'express';
 import { calculateBmi } from '../bodyMass/bmiCalculator';
-// import { calculateExercises } from '../bodyMass/exerciseCalculator';
+import { calculateExercises } from '../bodyMass/exerciseCalculator';
 const app = express();
+app.use(express.json());
 
 app.get('/hello', (_req, res) => {
   res.send('Hello Full Stack!');
@@ -33,26 +34,31 @@ app.get('/bmi', (_req, res) => {
   }
 });
 
-app.post('/exercices', (_req, res) => {
+app.post('/exercises', (_req, res) => {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    //eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const { daily_exercises, target } = _req.body;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-    const validParameter1: boolean = daily_exercises.every((el: number) => {
-      return typeof el === 'number';
-    });
-    const validParameter2 = !isNaN(Number(target));
+    const validParameters: boolean =
+      Array.isArray(daily_exercises) && !isNaN(Number(target));
 
     if (!daily_exercises || !target) {
       return res.status(400).send({ error: 'parameters missing' });
     }
-    if (!validParameter1 || !validParameter2) {
-      return res.status(400).send({ error: 'malformatted parameters' });
+
+    if (!validParameters) {
+      return res
+        .status(400)
+        .json({
+          error: 'malformatted parameters'
+        })
+        .end();
     }
 
-    console.log('daily: ', daily_exercises, 'target: ', target);
+    const data: Array<number> = daily_exercises.concat([target]);
 
-    return null;
+    const exos = calculateExercises(data);
+
+    return res.json(exos);
   } catch (error) {
     console.log(error);
 

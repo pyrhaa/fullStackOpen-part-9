@@ -35,8 +35,8 @@ const calculateExercises = (exercices: Array<number>): Result => {
   const average: number =
     exercices.reduce((a, b) => a + b, 0) / exercices.length;
 
-  let rating: number;
-  let ratingDescription: string;
+  let rating: number = 0;
+  let ratingDescription: string = '';
   const target = exercices[0];
   if (average < target) {
     rating = 1;
