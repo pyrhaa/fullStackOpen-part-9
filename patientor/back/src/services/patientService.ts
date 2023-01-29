@@ -1,8 +1,14 @@
 import patients from '../../data/patientsDb';
-import { Patient } from '../types';
+import { NonSsn } from '../types';
 
-const getPatients = (): Array<Patient> => {
-  return patients;
+const getPatients = (): Array<NonSsn> => {
+  return patients.map(({ id, name, dateOfBirth, gender, occupation }) => ({
+    id,
+    name,
+    dateOfBirth,
+    gender,
+    occupation
+  }));
 };
 
 export default {
