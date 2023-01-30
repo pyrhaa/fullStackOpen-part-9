@@ -1,8 +1,9 @@
 import patients from '../../data/patientsDb';
 import { NonSsn, NewPatient, Patient } from '../types';
-import { v1 as uuid } from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 const patientsData: Patient[] = patients;
+const id: string = uuid();
 
 const getPatients = (): Array<NonSsn> => {
   return patients.map(({ id, name, dateOfBirth, gender, occupation }) => ({
@@ -16,7 +17,7 @@ const getPatients = (): Array<NonSsn> => {
 
 const addPatient = (patient: NewPatient): Patient => {
   const newPatient: Patient = {
-    id: uuid(),
+    id: id,
     ...patient
   };
   patientsData.push(newPatient);
