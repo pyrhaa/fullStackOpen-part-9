@@ -15,6 +15,11 @@ const getPatients = (): Array<NonSsn> => {
   }));
 };
 
+const findById = (id: string): Patient | undefined => {
+  const entry = patients.find((d) => d.id === id);
+  return entry;
+};
+
 const addPatient = (patient: NewPatient): Patient => {
   const newPatient: Patient = {
     id: id,
@@ -26,5 +31,6 @@ const addPatient = (patient: NewPatient): Patient => {
 
 export default {
   getPatients,
-  addPatient
+  addPatient,
+  findById
 };
