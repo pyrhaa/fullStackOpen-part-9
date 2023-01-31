@@ -20,6 +20,7 @@ router.get('/:id', (_req, res) => {
 
 router.post('/', (_req, res) => {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     const newPatientEntry = toNewPatient(_req.body);
 
     const addedEntry = patientService.addPatient(newPatientEntry);
