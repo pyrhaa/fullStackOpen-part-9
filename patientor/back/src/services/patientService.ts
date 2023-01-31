@@ -21,12 +21,12 @@ const findById = (id: string): Patient | undefined => {
 };
 
 const addPatient = (patient: NewPatient): Patient => {
-  const newPatient: Patient = {
+  const newPatientEntry: Patient = {
     id: id,
     ...patient
   };
-  patientsData.push(newPatient);
-  return newPatient;
+  patientsData.push(newPatientEntry);
+  return newPatientEntry;
 };
 
 export default {
