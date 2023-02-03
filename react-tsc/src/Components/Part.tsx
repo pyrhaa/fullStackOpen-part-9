@@ -22,6 +22,14 @@ const Part = ({ part }: { part: CoursePart }): JSX.Element => {
           </a>
         </div>
       );
+    case 'special':
+      return (
+        <div>
+          <span>{part.description}</span>
+          <br />
+          <span>requirements: {part.requirements.join(', ')}</span>
+        </div>
+      );
 
     default:
       return assertNever(part);
