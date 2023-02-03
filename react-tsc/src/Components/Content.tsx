@@ -1,16 +1,15 @@
-interface ContentProps {
-  name: string;
-  exerciseCount: number;
-}
+import CoursePart from '../types';
+import Part from './Part';
 
-const Content = ({ content }: { content: ContentProps[] }): JSX.Element => {
+const Content = ({ content }: { content: CoursePart[] }): JSX.Element => {
   return (
     <div>
       {content.map((part) => (
         <div key={part.name}>
-          <p>
+          <h3>
             {part.name} {part.exerciseCount}
-          </p>
+          </h3>
+          <Part part={part} />
         </div>
       ))}
     </div>

@@ -2,6 +2,7 @@ interface CoursePartBase {
   name: string;
   exerciseCount: number;
   type: string;
+  description?: string;
 }
 
 interface CourseNormalPart extends CoursePartBase {
@@ -20,15 +21,6 @@ interface CourseSubmissionPart extends CoursePartBase {
   exerciseSubmissionLink: string;
 }
 
-interface CourseDescriptionPart extends CoursePartBase {
-  type: 'description';
-  description: string;
-}
-
-type CoursePart =
-  | CourseNormalPart
-  | CourseProjectPart
-  | CourseSubmissionPart
-  | CourseDescriptionPart;
+type CoursePart = CourseNormalPart | CourseProjectPart | CourseSubmissionPart;
 
 export default CoursePart;
