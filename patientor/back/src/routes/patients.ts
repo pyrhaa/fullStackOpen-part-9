@@ -9,7 +9,7 @@ router.get('/', (_req, res) => {
 });
 
 router.get('/:id', (_req, res) => {
-  const patient = patientService.findById(_req.params.id);
+  const patient = patientService.getPatientById(_req.params.id);
 
   if (patient) {
     res.send(patient);
