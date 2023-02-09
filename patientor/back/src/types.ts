@@ -9,8 +9,58 @@ export interface Diagnose {
   latin?: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface Entry {}
+export const EntryTypes = [
+  'HealthCheck',
+  'Hospital',
+  'OccupationalHealthcare'
+] as const;
+
+interface BaseEntry {
+  id: string;
+  description: string;
+  date: string;
+  specialist: string;
+  diagnosisCodes?: Array<Diagnose['code']>;
+  type: typeof EntryTypes[number];
+}
+
+export enum HealthCheckRating {
+  'Healthy' = 0,
+  'LowRisk' = 1,
+  'HighRisk' = 2,
+  'CriticalRisk' = 3
+}
+
+interface HealthCheckEntry extends BaseEntry {
+  type: 'HealthCheck';
+  healthCheckRating: HealthCheckRating;
+}
+
+interface HospitalDischarge {
+  date: string;
+  criteria: string;
+}
+
+interface HospitalEntry extends BaseEntry {
+  type: 'Hospital';
+  discharge: HospitalDischarge;
+}
+
+interface SickLeave {
+  startDate: string;
+  endDate: string;
+}
+
+interface OccupationalHealthcareEntry extends BaseEntry {
+  type: 'OccupationalHealthcare';
+  employerName: string;
+  sickLeave?: SickLeave;
+}
+
+export type Entry =
+  | HealthCheckEntry
+  | HospitalEntry
+  | OccupationalHealthcareEntry;
 
 export interface Patient {
   id: string;
@@ -22,13 +72,5 @@ export interface Patient {
   entries: Entry[];
 }
 
-export type Fields = {
-  name: unknown;
-  dateOfBirth: unknown;
-  ssn: unknown;
-  gender: unknown;
-  occupation: unknown;
-};
-
-export type NewPatient = Omit<Patient, 'id' | 'entries'>;
+export type NewPatient = Omit<Patient, 'id'>;
 export type PublicPatient = Omit<Patient, 'ssn' | 'entries'>;
