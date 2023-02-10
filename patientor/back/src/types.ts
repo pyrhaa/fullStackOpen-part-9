@@ -1,3 +1,5 @@
+type UnionOmit<T, K extends keyof T> = T extends unknown ? Omit<T, K> : never;
+
 export enum Gender {
   Male = 'male',
   Female = 'female'
@@ -31,22 +33,22 @@ export enum HealthCheckRating {
   'CriticalRisk' = 3
 }
 
-interface HealthCheckEntry extends BaseEntry {
+export interface HealthCheckEntry extends BaseEntry {
   type: 'HealthCheck';
   healthCheckRating: HealthCheckRating;
 }
 
-interface HospitalDischarge {
+export interface HospitalDischarge {
   date: string;
   criteria: string;
 }
 
-interface HospitalEntry extends BaseEntry {
+export interface HospitalEntry extends BaseEntry {
   type: 'Hospital';
   discharge: HospitalDischarge;
 }
 
-interface SickLeave {
+export interface SickLeave {
   startDate: string;
   endDate: string;
 }
@@ -74,3 +76,5 @@ export interface Patient {
 
 export type NewPatient = Omit<Patient, 'id'>;
 export type PublicPatient = Omit<Patient, 'ssn' | 'entries'>;
+export type TypeSpecificEntry = UnionOmit<Entry, keyof Omit<BaseEntry, 'type'>>;
+export type NewEntry = UnionOmit<Entry, 'id'>;
