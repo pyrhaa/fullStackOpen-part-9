@@ -6,7 +6,7 @@ const add = (
   patientId: Patient['id'],
   payload: NewEntry
 ): Entry | undefined => {
-  const patient = patientService.findById(patientId);
+  const patient = patientService.getPatientById(patientId);
   if (!patient) return;
 
   const entry: Entry = {

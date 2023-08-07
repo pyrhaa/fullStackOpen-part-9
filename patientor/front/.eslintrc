@@ -1,10 +1,11 @@
 {
   "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:react/recommended",
-      "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
+  "project": ["tsconfig.json", "./tsconfig.json"],
   "plugins": ["@typescript-eslint", "react"],
   "env": {
     "browser": true,
@@ -16,12 +17,13 @@
     "@typescript-eslint/explicit-module-boundary-types": 0,
     "@typescript-eslint/no-unsafe-member-access": 0,
     "@typescript-eslint/no-unused-vars": [
-        "error", { "argsIgnorePattern": "^_" }
+      "error",
+      { "argsIgnorePattern": "^_" }
     ],
     "@typescript-eslint/no-explicit-any": 1,
     "no-case-declarations": 0,
     "react/prop-types": 0,
-     "react/react-in-jsx-scope": 0
+    "react/react-in-jsx-scope": 0
   },
   "settings": {
     "react": {
