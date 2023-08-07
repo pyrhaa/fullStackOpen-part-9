@@ -4,6 +4,7 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
+  "project": ["tsconfig.json", "./tsconfig.json"],
   "plugins": ["@typescript-eslint"],
   "env": {
     "browser": true,
