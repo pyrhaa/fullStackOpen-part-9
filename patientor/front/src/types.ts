@@ -22,7 +22,7 @@ interface BaseEntry {
   date: string;
   specialist: string;
   diagnosisCodes?: Array<Diagnosis['code']>;
-  type: typeof EntryTypes[number];
+  type: (typeof EntryTypes)[number];
 }
 
 export enum HealthCheckRating {
@@ -63,6 +63,10 @@ export type Entry =
   | HospitalEntry
   | OccupationalHealthcareEntry;
 
+type UnionOmit<T, K extends string | number | symbol> = T extends unknown
+  ? Omit<T, K>
+  : never;
+
 export interface Patient {
   id: string;
   name: string;
@@ -72,3 +76,7 @@ export interface Patient {
   dateOfBirth?: string;
   entries?: Entry[];
 }
+
+export type PatientValues = Omit<Patient, 'id' | 'entries'>;
+
+export type EntryWithoutId = UnionOmit<Entry, 'id'>;
