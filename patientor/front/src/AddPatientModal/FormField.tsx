@@ -51,8 +51,7 @@ interface TextProps extends FieldProps {
   placeholder: string;
 }
 
-export const TextField = ({ field, label, placeholder, form }: TextProps) => {
-  console.log(form.errors);
+export const TextField = ({ field, label, placeholder }: TextProps) => (
   <div style={{ marginBottom: '1em' }}>
     <TextFieldMUI
       fullWidth
@@ -63,8 +62,8 @@ export const TextField = ({ field, label, placeholder, form }: TextProps) => {
     <Typography variant="subtitle2" style={{ color: 'red' }}>
       <ErrorMessage name={field.name} />
     </Typography>
-  </div>;
-};
+  </div>
+);
 
 interface NumberProps extends FieldProps {
   label: string;
