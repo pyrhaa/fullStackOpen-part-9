@@ -5,16 +5,8 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { apiBaseUrl } from '../constants';
 import { addPatient, useStateValue } from '../state';
-import { Patient, Diagnosis } from '../types';
+import { Patient } from '../types';
 import { EntryDetails } from './EntryDetails';
-import patientService from '../services/patientServices';
-import diagnosisService from '../services/diagnosis';
-
-interface VisibleButtons {
-  hospital: boolean;
-  occupationalCheck: boolean;
-  healthCheck: boolean;
-}
 
 const PatientPage = () => {
   const { id } = useParams<{ id: string }>();

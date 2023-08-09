@@ -5,7 +5,6 @@
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
-  "project": ["tsconfig.json", "./tsconfig.json"],
   "plugins": ["@typescript-eslint", "react"],
   "env": {
     "browser": true,

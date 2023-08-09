@@ -66,9 +66,6 @@ export const TextField = ({ field, label, placeholder, form }: TextProps) => {
   </div>;
 };
 
-/*
-  for exercises 9.24.-
-*/
 interface NumberProps extends FieldProps {
   label: string;
   min: number;
